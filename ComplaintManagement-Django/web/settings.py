@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -102,7 +103,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript)
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # this is important!
+STATICFILES_DIRS = [BASE_DIR / "static"]  # if you have local static/ folder
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 
 # Media files (Uploaded images, etc.)
 MEDIA_URL = '/media/'
